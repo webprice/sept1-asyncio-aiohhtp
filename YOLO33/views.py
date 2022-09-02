@@ -314,7 +314,7 @@ def load_data(request):
     if request.user.groups.filter(name='hundred').exists():
         pages=3
         PAGES=100
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(main(amount=pages))
         ob = [Data(title=i.title, seller=i.seller, price=i.price, photo=i.photo) for i in DB_DATA_LIST]
         obj = Data.objects.bulk_create(ob)
@@ -323,7 +323,7 @@ def load_data(request):
     if request.user.groups.filter(name='twohundred').exists():
         PAGES = 200
         pages = 5
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(main(amount=pages))
         ob = [Data(title=i['title'], seller=i['seller'], price=i['price'], photo=i['photo']) for i in DB_DATA_LIST]
         obj = Data.objects.bulk_create(ob)
@@ -336,7 +336,7 @@ def load_data(request):
         # delete all data
         PAGES=300
         pages = 7
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(main(amount=pages))
         ob = [Data(title=i['title'], seller=i['seller'], price=i['price'], photo=i['photo']) for i in DB_DATA_LIST]
         obj = Data.objects.bulk_create(ob)
