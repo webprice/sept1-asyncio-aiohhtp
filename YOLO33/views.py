@@ -95,23 +95,25 @@ async def get_ads_data(session,url):
 
 async def parse_get_ads_data(text):
     #print(text)
-    soup =  BeautifulSoup(text, 'html.parser')
-    items = soup.find(id='root')
-    xxx = items.find_all('div', {'class': 'swiper-zoom-container'}, limit=1)
-
     try:
-        title = items.h1.get_text()
-        seller = items.h4.get_text()
-        price = items.h3.get_text()
-        photo = xxx[0].find_next('img')['src']
-        DB_DATA_LIST.append({'title':title,
-                            'seller': seller,
-                            'price':price,
-                            'photo': photo,})
-        print(title, seller, price, photo)
+        soup =  BeautifulSoup(text, 'html.parser')
+        items = soup.find(id='root')
+        xxx = items.find_all('div', {'class': 'swiper-zoom-container'}, limit=1)
+
+        try:
+            title = items.h1.get_text()
+            seller = items.h4.get_text()
+            price = items.h3.get_text()
+            photo = xxx[0].find_next('img')['src']
+            DB_DATA_LIST.append({'title':title,
+                                'seller': seller,
+                                'price':price,
+                                'photo': photo,})
+            print(title, seller, price, photo)
+        except:
+            pass
     except:
         pass
-
 
 async def main(amount):
     async with aiohttp.ClientSession() as session:
