@@ -117,6 +117,10 @@ async def parse_get_ads_data(text):
 
 async def main(amount):
     async with aiohttp.ClientSession() as session:
+        global DB_DATA_LIST
+        DB_DATA_LIST.clear()
+        global DB_DATA_OBJECT
+        DB_DATA_OBJECT.clear()
         tasks = []
         tasks2 = []
         global LOOP
