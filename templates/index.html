@@ -28,6 +28,8 @@
 {% endif %}</h2>
           <button type="button" class="btn btn-secondary" onclick="loadTable()">Refresh data</button>
           <button type="button" class="btn btn-secondary" onclick="existingData()">Get existing data</button>
+          <button type="button" class="btn btn-secondary" onclick="sortTable(2)">Sort by price</button>
+
           </div>
         <div class="p-2 bd-highlight">
             <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary">Log out</button></a>
@@ -36,11 +38,12 @@
 
         </div>
       </div>
-{% if role == 'hundred' %}
-      <div class="table-responsive">
-        <table class="table">
+    <div class="table-responsive">
+        <table class="table" id="myTable2">
           <thead>
             <tr>
+{% if role == 'hundred' %}
+
               <th scope="col" class="col-1">#</th>
               <th scope="col" class="col-3">Title</th>
               <th scope="col" class="col-2">Price</th>
@@ -51,10 +54,6 @@
           </thead>
             {% endif %}
     {% if role == 'twohundred' %}
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
               <th scope="col" class="col-1">#</th>
               <th scope="col" class="col-3">Title</th>
               <th scope="col" class="col-2">Price</th>
@@ -65,10 +64,6 @@
           </thead>
             {% endif %}
     {% if role == 'threehundred' %}
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
               <th scope="col" class="col-1">#</th>
               <th scope="col" class="col-3">Title</th>
               <th scope="col" class="col-2">Price</th>
