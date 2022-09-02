@@ -316,7 +316,7 @@ def load_data(request):
         PAGES=100
         # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(main(amount=pages))
-        ob = [Data(title=i.title, seller=i.seller, price=i.price, photo=i.photo) for i in DB_DATA_LIST]
+        ob = [Data(title=i['title'], seller=i['seller'], price=i['price'], photo=i['photo']) for i in DB_DATA_LIST]
         obj = Data.objects.bulk_create(ob)
         data = list(Data.objects.values('id', 'title', 'price', 'photo', 'seller').order_by('-id')[:100])
         print(PAGES, pages)
