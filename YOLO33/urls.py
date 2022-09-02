@@ -27,7 +27,7 @@ path('load_data', views.load_data, name='load_data'),
 path('existing_data', views.existing_data, name='existing_data'),
 path('test_delete/<int:id>', views.test_delete, name='test_delete'),
 path("accounts/", include("django.contrib.auth.urls")),
-
+path('real_delete/',views.real_delete, name='real_delete'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

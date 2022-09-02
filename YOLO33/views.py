@@ -184,22 +184,15 @@ def load_data(request):
         asyncio.run(main(amount=pages))
         ob = [Data(title=i['title'], seller=i['seller'], price=i['price'], photo=i['photo']) for i in DB_DATA_LIST]
         obj = Data.objects.bulk_create(ob)
-        # invoke scrape
-        # get_links('threehundred')
-        # send the new data to the front
         data = list(Data.objects.values('id', 'title', 'price', 'photo', 'seller').order_by('-id')[:200])
         print(PAGES, pages)
     if request.user.groups.filter(name='threehundred').exists():
-        # delete all data
         PAGES=300
         pages = 7
         # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(main(amount=pages))
         ob = [Data(title=i['title'], seller=i['seller'], price=i['price'], photo=i['photo']) for i in DB_DATA_LIST]
         obj = Data.objects.bulk_create(ob)
-        # invoke scrape
-        # get_links('threehundred')
-        # send the new data to the front
         data = list(Data.objects.values('id', 'title', 'price', 'photo', 'seller').order_by('-id')[:300])
         print(PAGES, pages)
     print("--- %s seconds ---" % (time.time() - start_time))
@@ -227,3 +220,9 @@ def test_delete(request,id):
     Data.objects.filter(id=id).delete()
     data = list(Data.objects.values('id', 'title', 'price', 'photo', 'seller').order_by('id'))
     return  JsonResponse(data,safe=False)
+
+@require_login
+def real_delete(request):
+    Data.objects.all().delete()
+    data = {'info':'all data has been removed from the database'}
+    return JsonResponse(data,safe=False)
